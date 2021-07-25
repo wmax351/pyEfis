@@ -9,7 +9,7 @@ main:
   screenHeight: 480
 
   # Set EFIS to occupy the entire screen without system border / menu
-  screenFullSize: True
+  screenFullSize: false
 
   # Screen background color RGB
   screenColor: (0,0,0)
@@ -34,17 +34,26 @@ menu:
           - ['EPFD', 'Show Screen','EPFD']
           - ['EMS', 'Show Screen','EMS']
           - ['Six', 'Show Screen','SixPack']
-          - ['Main', 'activate menu','PFDMenu']
+          - ['Config', 'activate menu','ConfigMenu']
+      ConfigMenu:
+          - ['Hide', 'activate menu', 'ShowMenu3']
+          - ['Back', 'Show Previous Screen','']
+          - ['Next', 'Show Next Screen','']
+          - ['Baro -', 'Change Value','BARO,-0.01']
+          - ['Baro +', 'Change Value','BARO,0.01']
+          - ['Basic', 'activate menu','PFDMenu']
       ShowMenu:
           - ['Show', 'activate menu','PFDMenu']
       ShowMenu2:
           - ['Show', 'activate menu','BasicMenu']
+      ShowMenu3: 
+          - ['Show', 'activate menu','ConfigMenu']
   start_menu: ShowMenu
 #  show_time: 3  # hides the menu after 3 seconds.  However cannot show again.  Don't use.  Here for reference only.
   number_of_buttons: 6
   buttons_spacing: 120
-  left_margin: 50
-  top_margin: 420
+  left_margin: 0
+  top_margin: 440
 
 # The keybindings are used to attach keystrokes to actions.  The key can be
 # a string that represents a key Sequence.  See the documentation for more
