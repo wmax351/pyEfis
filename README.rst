@@ -1,5 +1,6 @@
 pyEfis
 ==================
+This is an experimental system, and is not suited for primary or backup flight or engine instrumentation. Use at your own risk. 
 
 Getting Started
 ---------------
