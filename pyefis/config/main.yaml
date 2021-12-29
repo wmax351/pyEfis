@@ -51,8 +51,8 @@ menu:
   start_menu: ShowMenu
 #  show_time: 3  # hides the menu after 3 seconds.  However cannot show again.  Don't use.  Here for reference only.
   number_of_buttons: 6
-  buttons_spacing: 120
-  left_margin: 0
+  buttons_spacing: 130
+  left_margin: 20
   top_margin: 440
 
 # The keybindings are used to attach keystrokes to actions.  The key can be
