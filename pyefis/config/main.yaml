@@ -9,7 +9,7 @@ main:
   screenHeight: 480
 
   # Set EFIS to occupy the entire screen without system border / menu
-  screenFullSize: True
+  screenFullSize: False
 
   # Screen background color RGB
   screenColor: (0,0,0)
@@ -41,13 +41,24 @@ menu:
           - ['Next', 'Show Next Screen','']
           - ['Baro -', 'Change Value','BARO,-0.01']
           - ['Baro +', 'Change Value','BARO,0.01']
+          - ['Leaning', 'activate menu','EMSMenu']
+      EMSMenu:
+          - ['Hide', 'activate menu', 'ShowMenu4']
+          - ['Normalize', 'Set EGT Mode','Normalize']
+          - ['Peak', 'Set EGT Mode','Peak']
+          - ['Lean', 'Set EGT Mode','Lean']
+          - ['Reset Peak', 'Set EGT Mode','Reset Peak']
           - ['Basic', 'activate menu','PFDMenu']
+          
       ShowMenu:
           - ['Show', 'activate menu','PFDMenu']
       ShowMenu2:
           - ['Show', 'activate menu','BasicMenu']
       ShowMenu3: 
           - ['Show', 'activate menu','ConfigMenu']
+      ShowMenu4: 
+          - ['Show', 'activate menu','EMSMenu']
+
   start_menu: ShowMenu
 #  show_time: 3  # hides the menu after 3 seconds.  However cannot show again.  Don't use.  Here for reference only.
   number_of_buttons: 6
@@ -72,14 +83,14 @@ keybindings:
   - key: M
     action: Set Airspeed Mode
 
-  - key: Q
-    action: Set Value
-    args: BTN6, True
-    direction: DN
-  - key: Q
-    action: Set Value
-    args: BTN6, False
-    direction: UP
+#  - key: Q
+#    action: Set Value
+#    args: BTN6, True
+#    direction: DN
+#  - key: Q
+#    action: Set Value
+#    args: BTN6, False
+#    direction: UP
   - key: U
     action: Set Instrument Units
     args: OAT,OILT1,Temperature:Toggle
@@ -137,9 +148,9 @@ databindings:
     condition: True
     action: Activate Menu Item
     args: 6
-  - key: ENC1
-    action: Menu Encoder
-    args: <VALUE>   # This sends the data value to the action
+#  - key: ENC1
+#    action: Menu Encoder
+#    args: <VALUE>   # This sends the data value to the action
   - key: OILP1
     condition: < 25
     action: Show Screen
@@ -168,16 +179,16 @@ screens:
   EPFD:
     module: pyefis.screens.epfd
     title: Primary Flight Display
-    dbpath: /home/phil/.makerplane/data/CIFP/FAACIFP18
-    indexpath: /home/phil/.makerplane/data/CIFP/index.bin
+    dbpath: /home/debian/.makerplane/data/CIFP/FAACIFP18
+    indexpath: /home/debian/.makerplane/data/CIFP/index.bin
     check_engine: [MAP1, TACH1, OILP1, OILT1, FUELQT, FUELF1, CHTMAX1, EGTAVG1]
     update_period: .1
 
   PFD:
     module: pyefis.screens.pfd
     title: Primary Flight Display
-    dbpath: /home/phil/.makerplane/data/CIFP/FAACIFP18
-    indexpath: /home/phil/.makerplane/data/CIFP/index.bin
+    dbpath: /home/debian/.makerplane/data/CIFP/FAACIFP18
+    indexpath: /home/debian/.makerplane/data/CIFP/index.bin
     update_period: .1
 
   EMS:

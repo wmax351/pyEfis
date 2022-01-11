@@ -56,20 +56,30 @@ def gauge_list(width, height):
 #            "y":0,
 #        },
         {
-            "name":"Oil Press",
+            "name":"Oil Pump Press",
             "type":gauges.HorizontalBar,
-            "key":"OILP" + ENGINE_NUMBER,
-            "decPlaces":1,
+            "key":"OILP1",
+            "decPlaces":0,
             "width":200,
             "height":75,
             "x":width - 202,
             "y":0,
         },
         {
+            "name":"Oil Gallery Press",
+            "type":gauges.HorizontalBar,
+            "key":"OILG1",
+            "decPlaces":0,
+            "width":200,
+            "height":75,
+            "x":width - 202,
+            "y":75,
+        },
+        {
             "name":"Oil Temp",
             "type":gauges.HorizontalBar,
             "key":"OILT" + ENGINE_NUMBER,
-            "decPlaces":1,
+            "decPlaces":0,
             "units1":u'\N{DEGREE SIGN}F',
             "unitFunction1":funcTempF,
             "units2":u'\N{DEGREE SIGN}C',
@@ -77,16 +87,16 @@ def gauge_list(width, height):
             "width":200,
             "height":75,
             "x":width - 202,
-            "y":75,
+            "y":150,
         },
-#        {
-#            "type":misc.StaticText,
-#            "width":200,
-#            "height":30,
-#            "name":"Fuel",
-#            "x":width - 200,
-#            "y":170,
-#        },
+        {
+            "type":misc.StaticText,
+            "width":100,
+            "height":17,
+            "name":"Fuel",
+            "x":25,
+            "y":170,
+        },
 #        {
 #            "name":"Left",
 #            "type":gauges.VerticalBar,
@@ -120,17 +130,17 @@ def gauge_list(width, height):
 #            "x":width - 100,
 #            "y":200,
 #        },
-#        {
-#            "name":"Press",
-#            "type":gauges.VerticalBar,
-#            "key":"FUELP" + ENGINE_NUMBER,
-#            "decPlaces":1,
-#            "showUnits":False,
-#            "width":50,
-#            "height":150,
-#            "x":width - 50,
-#            "y":200,
-#        },
+        {
+            "name":"Press",
+            "type":gauges.VerticalBar,
+            "key":"FUELP" + ENGINE_NUMBER,
+            "decPlaces":1,
+            "showUnits":True,
+            "width":50,
+            "height":150,
+            "x":50,
+            "y":200,
+        },
 #        {
 #            "name":"Total",
 #            "type":gauges.NumericDisplay,
@@ -148,7 +158,7 @@ def gauge_list(width, height):
             "type":gauges.VerticalBar,
             "key":"VOLT",
             "decPlaces":1,
-            "showUnits":False,
+            "showUnits":True,
             "width":50,
             "height":150,
             "x":0,
@@ -171,7 +181,8 @@ def gauge_list(width, height):
             "engine": ENGINE_NUMBER,
             "cylinderCount": CYLINDER_COUNT,
             "decPlaces":0,
-            "showUnits":False,
+            "peakMode":False,
+            "showUnits":True,
             "width":200,
             "height":150,
             "x":150,
@@ -185,6 +196,30 @@ def gauge_list(width, height):
             "x":150,
             "y":170,
         },
+        {
+            "name":"MAX",
+            "type":misc.StaticText,
+            "width":30,
+            "height":12,
+            "x":160,
+            "y":360,
+        },
+       {
+           "name":"EGT Max",
+           "type":gauges.HorizontalBar,
+           "key":"EGTMAX" + ENGINE_NUMBER,
+           "decPlaces":0,
+           "units1":u'\N{DEGREE SIGN}F',
+           "unitFunction1":funcTempF,
+           "units2":u'\N{DEGREE SIGN}C',
+           "unitFunction2":funcTempC,
+           "showUnits":True,
+           "showName":False,
+           "width":75,
+           "height":30,
+           "x":190,
+           "y":360,
+       },
 
     ]
     return il
@@ -267,21 +302,23 @@ class Screen(QWidget):
         self.chtmax.unitsOverride1 = u'\N{DEGREE SIGN}F'
         self.chtmax.unitsOverride2 = u'\N{DEGREE SIGN}C'
         self.chtmax.setUnitSwitching()
+        self.chtmax.showUnits = True
         self.chtmax.unitGroup = "Temperature"
         self.chtmax.dbkey = "CHTMAX1"
+        
         #
         # self.egt = misc.StaticText("EGT", parent=self)
         # self.egtgroup = gauges.EGTGroup(self, self.cylCount, ["EGT11", "EGT12", "EGT13", "EGT14"])
         #
-        # self.hobbslabel = misc.StaticText("Engine Time", parent=self)
-        #
-        # self.hobbs = gauges.NumericDisplay(self)
-        # self.hobbs.name = "Hobbs"
-        # self.hobbs.decimalPlaces = 1
-        # self.hobbs.dbkey = "HOBBS1"
-        # self.hobbs.alignment = Qt.AlignRight | Qt.AlignVCenter
-        # self.hobbs.showUnits = True
-        # self.hobbs.smallFontPercent = 0.6
+        self.hobbslabel = misc.StaticText("Engine Time", parent=self)
+        
+        self.hobbs = gauges.NumericDisplay(self)
+        self.hobbs.name = "Hobbs"
+        self.hobbs.decimalPlaces = 1
+        self.hobbs.dbkey = "HOBBS1"
+        self.hobbs.alignment = Qt.AlignRight | Qt.AlignVCenter
+        self.hobbs.showUnits = True
+        self.hobbs.smallFontPercent = 0.6
         #
         # self.oatlabel = misc.StaticText("OAT", parent=self)
         # self.oatlabel.alignment = Qt.AlignLeft | Qt.AlignVCenter
@@ -340,13 +377,13 @@ class Screen(QWidget):
         self.chtmaxlabel.move(chtstartx + 10, 360)
         self.chtmax.resize(75, 30)
         self.chtmax.move(chtstartx + 45, 355)
-        #
-        #
-        # self.hobbslabel.resize(100,15)
-        # self.hobbslabel.move(self.width()-115, self.height()-85)
-        # self.hobbs.resize(110,20)
-        # self.hobbs.move(self.width()-115, self.height()-70)
-        #
+        
+        
+        self.hobbslabel.resize(100,15)
+        self.hobbslabel.move(self.width()-115, self.height()-85)
+        self.hobbs.resize(110,20)
+        self.hobbs.move(self.width()-115, self.height()-70)
+        
         # self.timez.resize(100, 20)
         # self.timez.move(self.width()-115, self.height()-40)
         #
