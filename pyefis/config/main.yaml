@@ -93,7 +93,7 @@ keybindings:
 #    direction: UP
   - key: U
     action: Set Instrument Units
-    args: OAT,OILT1,Temperature:Toggle
+    args: OAT,OILT1,EGTMAX1,Temperature:Toggle
 
   - key: F1
     action: Activate Menu Item

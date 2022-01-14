@@ -196,14 +196,14 @@ def gauge_list(width, height):
             "x":150,
             "y":170,
         },
-        {
-            "name":"MAX",
-            "type":misc.StaticText,
-            "width":30,
-            "height":12,
-            "x":160,
-            "y":360,
-        },
+#         {
+#             "name":"MAX",
+#             "type":misc.StaticText,
+#             "width":30,
+#             "height":12,
+#             "x":160,
+#             "y":360,
+#         },
        {
            "name":"EGT Max",
            "type":gauges.HorizontalBar,
@@ -213,11 +213,11 @@ def gauge_list(width, height):
            "unitFunction1":funcTempF,
            "units2":u'\N{DEGREE SIGN}C',
            "unitFunction2":funcTempC,
-           "showUnits":True,
+           "showUnits":False,
            "showName":False,
-           "width":75,
-           "height":30,
-           "x":190,
+           "width":150,
+           "height":50,
+           "x":160,
            "y":360,
        },
 
@@ -292,10 +292,10 @@ class Screen(QWidget):
             item = fix.db.get_item(cht.dbkey)
             item.valueChanged.connect(self.chtMax)
 
-        self.chtmaxlabel = misc.StaticText("MAX", parent=self)
+        #self.chtmaxlabel = misc.StaticText("MAX", parent=self)
 
-        self.chtmax = gauges.NumericDisplay(self)
-        self.chtmax.name = "CHT Max"
+        self.chtmax = gauges.HorizontalBar(self)
+#         self.chtmax.name = "CHT Max"
         self.chtmax.decimalPlaces = 0
         self.chtmax.conversionFunction1 = lambda x: x * (9.0/5.0) + 32.0
         self.chtmax.conversionFunction2 = lambda x: x
@@ -373,9 +373,9 @@ class Screen(QWidget):
             self.chts[x].resize(50, 150)
             self.chts[x].move(chtstartx + (50*x), 200)
 
-        self.chtmaxlabel.resize(30,12)
-        self.chtmaxlabel.move(chtstartx + 10, 360)
-        self.chtmax.resize(75, 30)
+#         self.chtmaxlabel.resize(30,25)
+#         self.chtmaxlabel.move(chtstartx + 10, 360)
+        self.chtmax.resize(100, 50)
         self.chtmax.move(chtstartx + 45, 355)
         
         
