@@ -216,8 +216,24 @@ def gauge_list(width, height):
            "showUnits":False,
            "showName":False,
            "width":150,
-           "height":50,
-           "x":160,
+           "height":75,
+           "x":170,
+           "y":360,
+       },
+       {
+           "name":"CHT Max",
+           "type":gauges.HorizontalBar,
+           "key":"CHTMAX" + ENGINE_NUMBER,
+           "decPlaces":0,
+           "units1":u'\N{DEGREE SIGN}F',
+           "unitFunction1":funcTempF,
+           "units2":u'\N{DEGREE SIGN}C',
+           "unitFunction2":funcTempC,
+           "showUnits":False,
+           "showName":False,
+           "width":150,
+           "height":75,
+           "x":400,
            "y":360,
        },
 
@@ -294,17 +310,17 @@ class Screen(QWidget):
 
         #self.chtmaxlabel = misc.StaticText("MAX", parent=self)
 
-        self.chtmax = gauges.HorizontalBar(self)
+#         self.chtmax = gauges.HorizontalBar(self)
 #         self.chtmax.name = "CHT Max"
-        self.chtmax.decimalPlaces = 0
-        self.chtmax.conversionFunction1 = lambda x: x * (9.0/5.0) + 32.0
-        self.chtmax.conversionFunction2 = lambda x: x
-        self.chtmax.unitsOverride1 = u'\N{DEGREE SIGN}F'
-        self.chtmax.unitsOverride2 = u'\N{DEGREE SIGN}C'
-        self.chtmax.setUnitSwitching()
-        self.chtmax.showUnits = True
-        self.chtmax.unitGroup = "Temperature"
-        self.chtmax.dbkey = "CHTMAX1"
+#         self.chtmax.decimalPlaces = 0
+#         self.chtmax.conversionFunction1 = lambda x: x * (9.0/5.0) + 32.0
+#         self.chtmax.conversionFunction2 = lambda x: x
+#         self.chtmax.unitsOverride1 = u'\N{DEGREE SIGN}F'
+#         self.chtmax.unitsOverride2 = u'\N{DEGREE SIGN}C'
+#         self.chtmax.setUnitSwitching()
+#         self.chtmax.showUnits = False
+#         self.chtmax.unitGroup = "Temperature"
+#         self.chtmax.dbkey = "CHTMAX1"
         
         #
         # self.egt = misc.StaticText("EGT", parent=self)
@@ -375,8 +391,8 @@ class Screen(QWidget):
 
 #         self.chtmaxlabel.resize(30,25)
 #         self.chtmaxlabel.move(chtstartx + 10, 360)
-        self.chtmax.resize(100, 50)
-        self.chtmax.move(chtstartx + 45, 355)
+#         self.chtmax.resize(100, 50)
+#         self.chtmax.move(chtstartx + 45, 355)
         
         
         self.hobbslabel.resize(100,15)
