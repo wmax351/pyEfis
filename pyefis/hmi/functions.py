@@ -15,6 +15,7 @@
 #  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 import pyavtools.fix as fix
+import os
 
 # Set a value in the FIX database.  arg should be "key,value"
 def setValue(arg):
@@ -30,3 +31,8 @@ def changeValue(arg):
 def toggleBool(arg):
     bit = fix.db.get_item(arg)
     bit.value = not bit.value
+
+# System Commands Function
+
+def syscom(arg):
+    os.system(arg)

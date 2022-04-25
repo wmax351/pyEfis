@@ -14,6 +14,8 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 import logging
+#import subprocess
+import os
 
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -49,6 +51,7 @@ class ActionClass(QWidget):
                           "toggle bit":functions.toggleBool,
                           "activate menu item":self.activateMenuItem,
                           "activate menu":activateMenu,
+                          "sys com":functions.syscom,
                           "menu encoder":self.menuEncoder,
                           "set menu focus":self.setMenuFocus,
                           "set instrument units":self.setInstUnits,

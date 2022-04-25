@@ -48,15 +48,15 @@ menu:
           - ['Peak', 'Set EGT Mode','Peak']
           - ['Lean', 'Set EGT Mode','Lean']
           - ['Rst Pk', 'Set EGT Mode','Reset Peak']
-          - ['EMS', 'activate menu','EMSMenu']
+          - ['PWR', 'activate menu','PWRMenu']
       
       PWRMenu:
           - ['Back', 'activate menu', 'EMSMenu']
-          - ['N/A', '','']
-          - ['N/A', '','']
-          - ['N/A', '','']
-          - ['N/A', '','']
-          - ['PWR OFF', '','EMSMenu']
+          - ['Back', 'activate menu', 'EMSMenu']
+          - ['Back', 'activate menu', 'EMSMenu']
+          - ['Back', 'activate menu', 'EMSMenu']
+          - ['Back', 'activate menu', 'EMSMenu']
+          - ['PWR OFF', 'sys com','sudo shutdown now']
           
       ShowMenu:
           - ['Show', 'activate menu','PFDMenu']
@@ -172,9 +172,9 @@ databindings:
 # OnChange will send when the value is changed and Both will
 # do both.
 outputs:
-  #TAS = Interval
-#  BARO: Interval
- # BTN16: OnChange
+ # TAS = Interval
+  BARO: Interval
+  BTN16: OnChange
 
 
 # Screen definitions describe the screens that will be loaded
