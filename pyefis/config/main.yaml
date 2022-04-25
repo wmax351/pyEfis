@@ -9,7 +9,7 @@ main:
   screenHeight: 480
 
   # Set EFIS to occupy the entire screen without system border / menu
-  screenFullSize: False
+  screenFullSize: True
 
   # Screen background color RGB
   screenColor: (0,0,0)
@@ -44,11 +44,19 @@ menu:
           - ['Leaning', 'activate menu','EMSMenu']
       EMSMenu:
           - ['Hide', 'activate menu', 'ShowMenu4']
-          - ['Normalize', 'Set EGT Mode','Normalize']
+          - ['Norm', 'Set EGT Mode','Normalize']
           - ['Peak', 'Set EGT Mode','Peak']
           - ['Lean', 'Set EGT Mode','Lean']
-          - ['Reset Peak', 'Set EGT Mode','Reset Peak']
-          - ['Basic', 'activate menu','PFDMenu']
+          - ['Rst Pk', 'Set EGT Mode','Reset Peak']
+          - ['EMS', 'activate menu','EMSMenu']
+      
+      PWRMenu:
+          - ['Back', 'activate menu', 'EMSMenu']
+          - ['N/A', '','']
+          - ['N/A', '','']
+          - ['N/A', '','']
+          - ['N/A', '','']
+          - ['PWR OFF', '','EMSMenu']
           
       ShowMenu:
           - ['Show', 'activate menu','PFDMenu']
@@ -59,7 +67,7 @@ menu:
       ShowMenu4: 
           - ['Show', 'activate menu','EMSMenu']
 
-  start_menu: ShowMenu
+  start_menu: ShowMenu4
 #  show_time: 3  # hides the menu after 3 seconds.  However cannot show again.  Don't use.  Here for reference only.
   number_of_buttons: 6
   buttons_spacing: 130
@@ -151,10 +159,10 @@ databindings:
 #  - key: ENC1
 #    action: Menu Encoder
 #    args: <VALUE>   # This sends the data value to the action
-  - key: OILP1
-    condition: < 25
-    action: Show Screen
-    args: EMS
+#  - key: OILP1
+ #   condition: < 25
+  #  action: Show Screen
+   # args: EMS
 
 
 # This section defines FIX IDs that we'll write out to the
@@ -165,8 +173,8 @@ databindings:
 # do both.
 outputs:
   #TAS = Interval
-  BARO: Interval
-  BTN16: OnChange
+#  BARO: Interval
+ # BTN16: OnChange
 
 
 # Screen definitions describe the screens that will be loaded
@@ -176,32 +184,32 @@ outputs:
 # the screen
 
 screens:
-  EPFD:
-    module: pyefis.screens.epfd
-    title: Primary Flight Display
-    dbpath: /home/debian/.makerplane/data/CIFP/FAACIFP18
-    indexpath: /home/debian/.makerplane/data/CIFP/index.bin
-    check_engine: [MAP1, TACH1, OILP1, OILT1, FUELQT, FUELF1, CHTMAX1, EGTAVG1]
-    update_period: .1
+#  EPFD:
+#    module: pyefis.screens.epfd
+#    title: Primary Flight Display
+#    dbpath: /home/debian/.makerplane/data/CIFP/FAACIFP18
+#    indexpath: /home/debian/.makerplane/data/CIFP/index.bin
+#    check_engine: [MAP1, TACH1, OILP1, OILT1, FUELQT, FUELF1, CHTMAX1, EGTAVG1]
+#    update_period: .1
 
-  PFD:
-    module: pyefis.screens.pfd
-    title: Primary Flight Display
-    dbpath: /home/debian/.makerplane/data/CIFP/FAACIFP18
-    indexpath: /home/debian/.makerplane/data/CIFP/index.bin
-    update_period: .1
+#  PFD:
+#    module: pyefis.screens.pfd
+#    title: Primary Flight Display
+#    dbpath: /home/debian/.makerplane/data/CIFP/FAACIFP18
+#    indexpath: /home/debian/.makerplane/data/CIFP/index.bin
+#    update_period: .1
 
   EMS:
     module: pyefis.screens.ems_sm
     title: Engine Management
 
-  SixPack:
-    module: pyefis.screens.sixpack
-    title: Standard Instrument Panel
+#  SixPack:
+#    module: pyefis.screens.sixpack
+#    title: Standard Instrument Panel
 
-  PFDSM:
-    module: pyefis.screens.pfd_sm
-    title: PFD Small
+#  PFDSM:
+#    module: pyefis.screens.pfd_sm
+#    title: PFD Small
 
   #Test:
   #  module: pyefis.screens.test

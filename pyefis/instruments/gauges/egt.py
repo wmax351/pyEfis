@@ -37,11 +37,11 @@ class EGTGroup(QWidget):
             bar.decimalPlaces = 0
             bar.showUnits = False
             bar.peakMode = False
-            bar.conversionFunction1 = lambda x: x * (9.0/5.0) + 32.0
+            #bar.conversionFunction1 = lambda x: x * (9.0/5.0) + 32.0
             bar.conversionFunction2 = lambda x: x
-            bar.unitsOverride1 = u'\N{DEGREE SIGN}F'
+            #bar.unitsOverride1 = u'\N{DEGREE SIGN}F'
             bar.unitsOverride2 = u'\N{DEGREE SIGN}C'
-            bar.setUnitSwitching()
+            #bar.setUnitSwitching()
             bar.unitGroup = "Temperature"
             bar.dbkey = dbkeys[i]
             bar.normalizeRange = 400
@@ -91,5 +91,5 @@ class EGTGroup(QWidget):
         x = 0
         for bar in self.bars:
             bar.resize(barwidth, barheight)
-            bar.move(barwidth * x, 0)
+            bar.move(barwidth * 2/3 * x, 0)
             x += 1

@@ -56,38 +56,38 @@ def gauge_list(width, height):
 #            "y":0,
 #        },
         {
-            "name":"Oil Pump Press",
+            "name":"Oil Press",
             "type":gauges.HorizontalBar,
             "key":"OILP1",
             "decPlaces":0,
             "width":200,
             "height":75,
-            "x":width - 202,
+            "x":300,
             "y":0,
         },
-        {
-            "name":"Oil Gallery Press",
-            "type":gauges.HorizontalBar,
-            "key":"OILG1",
-            "decPlaces":0,
-            "width":200,
-            "height":75,
-            "x":width - 202,
-            "y":75,
-        },
+#         {
+#             "name":"Oil Gallery Press",
+#             "type":gauges.HorizontalBar,
+#             "key":"OILG1",
+#             "decPlaces":0,
+#             "width":200,
+#             "height":75,
+#             "x":width - 202,
+#             "y":75,
+#         },
         {
             "name":"Oil Temp",
             "type":gauges.HorizontalBar,
             "key":"OILT" + ENGINE_NUMBER,
             "decPlaces":0,
-            "units1":u'\N{DEGREE SIGN}F',
-            "unitFunction1":funcTempF,
+            #"units1":u'\N{DEGREE SIGN}F',
+            #"unitFunction1":funcTempF,
             "units2":u'\N{DEGREE SIGN}C',
             "unitFunction2":funcTempC,
             "width":200,
             "height":75,
-            "x":width - 202,
-            "y":150,
+            "x":300,
+            "y":75,
         },
         {
             "type":misc.StaticText,
@@ -136,7 +136,7 @@ def gauge_list(width, height):
             "key":"FUELP" + ENGINE_NUMBER,
             "decPlaces":1,
             "showUnits":True,
-            "width":50,
+            "width":75,
             "height":150,
             "x":50,
             "y":200,
@@ -159,7 +159,7 @@ def gauge_list(width, height):
             "key":"VOLT",
             "decPlaces":1,
             "showUnits":True,
-            "width":50,
+            "width":75,
             "height":150,
             "x":0,
             "y":200,
@@ -183,7 +183,9 @@ def gauge_list(width, height):
             "decPlaces":0,
             "peakMode":False,
             "showUnits":True,
-            "width":200,
+            "units2":u'\N{DEGREE SIGN}C',
+            "unitFunction2":funcTempC,
+            "width":300,
             "height":150,
             "x":150,
             "y":200,
@@ -193,7 +195,7 @@ def gauge_list(width, height):
             "type":misc.StaticText,
             "width":200,
             "height":30,
-            "x":150,
+            "x":165,
             "y":170,
         },
 #         {
@@ -209,11 +211,11 @@ def gauge_list(width, height):
            "type":gauges.HorizontalBar,
            "key":"EGTMAX" + ENGINE_NUMBER,
            "decPlaces":0,
-           "units1":u'\N{DEGREE SIGN}F',
-           "unitFunction1":funcTempF,
+           #"units1":u'\N{DEGREE SIGN}F',
+           #"unitFunction1":funcTempF,
            "units2":u'\N{DEGREE SIGN}C',
            "unitFunction2":funcTempC,
-           "showUnits":False,
+           "showUnits":True,
            "showName":False,
            "width":150,
            "height":75,
@@ -225,11 +227,11 @@ def gauge_list(width, height):
            "type":gauges.HorizontalBar,
            "key":"CHTMAX" + ENGINE_NUMBER,
            "decPlaces":0,
-           "units1":u'\N{DEGREE SIGN}F',
-           "unitFunction1":funcTempF,
+           #"units1":u'\N{DEGREE SIGN}F',
+           #"unitFunction1":funcTempF,
            "units2":u'\N{DEGREE SIGN}C',
            "unitFunction2":funcTempC,
-           "showUnits":False,
+           "showUnits":True,
            "showName":False,
            "width":150,
            "height":75,
@@ -299,16 +301,16 @@ class Screen(QWidget):
             cht.conversionFunction1 = lambda x: x * (9.0/5.0) + 32.0
             cht.conversionFunction2 = lambda x: x
             #cht.unitsOverride1 = u'\N{DEGREE SIGN}F'
-            #cht.unitsOverride2 = u'\N{DEGREE SIGN}C'
+            cht.unitsOverride2 = u'\N{DEGREE SIGN}C'
             cht.unitGroup = "Temperature"
-            cht.setUnitSwitching()
+            #cht.setUnitSwitching()
             cht.showUnits = False
             cht.dbkey = "CHT1{}".format(x+1)
             self.chts.append(cht)
             item = fix.db.get_item(cht.dbkey)
             item.valueChanged.connect(self.chtMax)
 
-        #self.chtmaxlabel = misc.StaticText("MAX", parent=self)
+#         self.chtmaxlabel = misc.StaticText("MAX", parent=self)
 
 #         self.chtmax = gauges.HorizontalBar(self)
 #         self.chtmax.name = "CHT Max"
@@ -386,19 +388,19 @@ class Screen(QWidget):
         self.cht.move(chtstartx, 170)
 
         for x in range(len(self.chts)):
-            self.chts[x].resize(50, 150)
+            self.chts[x].resize(75, 150)
             self.chts[x].move(chtstartx + (50*x), 200)
 
 #         self.chtmaxlabel.resize(30,25)
 #         self.chtmaxlabel.move(chtstartx + 10, 360)
-#         self.chtmax.resize(100, 50)
+#         self.chtmax.resize(100, 900)
 #         self.chtmax.move(chtstartx + 45, 355)
         
         
-        self.hobbslabel.resize(100,15)
-        self.hobbslabel.move(self.width()-115, self.height()-85)
-        self.hobbs.resize(110,20)
-        self.hobbs.move(self.width()-115, self.height()-70)
+        self.hobbslabel.resize(200,20)
+        self.hobbslabel.move(self.width()-250, self.height()-100)
+        self.hobbs.resize(110,30)
+        self.hobbs.move(self.width()-215, self.height()-80)
         
         # self.timez.resize(100, 20)
         # self.timez.move(self.width()-115, self.height()-40)
